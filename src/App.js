@@ -6,16 +6,22 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Login from './pages/Login';
 
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
       element: <HomeRoute />,
     },
+    {
+      path: "/login",
+      element: <Login />,
+    },
   ]);
   return (
-    <div className="">
+    <div>
       <Header />
       <div style={{ minHeight: "100vh", minWidth: "100vw" }}>
         <RouterProvider router={router} />
