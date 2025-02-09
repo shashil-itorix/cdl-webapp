@@ -5,7 +5,7 @@ const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        message: "",
+        description: "",
     });
 
     console.log(formData);
@@ -16,8 +16,9 @@ const ContactForm = () => {
         <input 
             placeholder="Enter your name"
             value={formData.name}
+            className="form-control"
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-/>
+          />
       </div>
 
       <div className="form-desc">
@@ -26,17 +27,19 @@ const ContactForm = () => {
         placeholder="Enter your email address"
         value={formData.email}
         type="email"
+        className="form-control"
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
          />
       </div>
 
       <div className="form-desc">
-        <label>Message :</label>
+        <label>Description :</label>
         <textarea 
-        placeholder="Enter your massage"
-        value={formData.message}
-        rows="8"
-        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+        placeholder="Enter Enquiry Text"
+        value={formData.description}
+        rows="6"
+        className="form-control"
+        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
         />
       </div>
 

@@ -31,19 +31,15 @@ function App() {
           path: "/industrial",
           element: <PropertyListingPage />,
         },
+        {
+          path: "/admin/:propertyType/listings",
+          element: <PropertyDetails />,
+        },
+        {
+          path: "/admin/:propertyType/enquiries",
+          element: <Enquiry />,
+        },
       ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/admin/:propertyType/listings",
-      element: <PropertyDetails />,
-    },
-    {
-      path: "/admin/:propertyType/enquiries",
-      element: <Enquiry />,
     },
   ]);
   return (
