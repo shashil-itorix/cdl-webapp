@@ -265,8 +265,8 @@ export const MODE = {
   EDIT: "edit",
 };
 export const TYPE_OPTION = [
-  { label: "Sale", value: "sale" },
-  { label: "Lease", value: "lease" },
+  { label: "Sale", value: "SALE" },
+  { label: "Lease", value: "LEASE" },
 ];
 export const CATEGORY_OPTIONS = [
   { label: "Luxury", value: "luxury" },
@@ -278,6 +278,11 @@ export const CATEGORY_OPTIONS = [
 export const PROPERTY_STATUS = [
   { label: "In Progress", value: "in progress" },
   { label: "For Sale", value: "for sale" },
+];
+export const PROPERTY_TYPE_OPTIONS = [
+  { label: "Residential", value: "RESIDENTIAL" },
+  { label: "Commercial", value: "COMMERCIAL" },
+  { label: "Industrial", value: "INDUSTRIAL" },
 ];
 export const COUNTRIES = [
   "Hong Kong",
