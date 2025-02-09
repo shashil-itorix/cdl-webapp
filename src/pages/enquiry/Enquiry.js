@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ENQUIRIES_LIST } from "../property/constants";
 import ViewEnquiry from "./ViewEnquiry";
+import { makeApiCall } from "../../api";
+import { throwServerError } from "../../constants";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loader from "../../components/Loader";
 
 const Enquiry = () => {
   const [viewEnquiry, setViewEnquiry] = useState({ isOpen: false, data: {} });
+  const { isAuthenticated } = useAuth0();
   const modalRef = useRef(null);
-
-  const handleCloseEnquiry = (ind) => {
-    const enquires = structuredClone(ENQUIRIES_LIST);
-    enquires.splice(ind, 1);
-    //integrate delete api
-    console.log("enquires", enquires);
-  };
+  const [enquiries, setEnquiries] = useState([])
+  const [loading, setLoading] = useState(true);
 
   const handleCloseModal = () => {
     if (modalRef.current) {
@@ -27,6 +27,47 @@ const Enquiry = () => {
       modalRef.current.show();
     }
   }, [viewEnquiry.isOpen]);
+
+  const handleCloseEnquiry = (id) => {
+    const url = window.location.pathname;
+
+    const isCommercial = url.includes("/commercial")
+    const isResidential = url.includes("/residential")
+
+    const enquiryType = isCommercial  ? "commercial" : isResidential ? "residential" : "industrial"
+
+    makeApiCall("DELETE", `/${enquiryType}/enquiries/${id}`)
+    .then(() => {
+      getData()
+    }).catch((err) => {
+      console.log('err', err);
+      throwServerError(err);
+    })
+  }
+
+  const getData = () => {
+    const url = window.location.pathname;
+
+    const isCommercial = url.includes("/commercial")
+    const isResidential = url.includes("/residential")
+
+    const enquiryType = isCommercial  ? "commercial" : isResidential ? "residential" : "industrial"
+
+    setLoading(true);
+    makeApiCall("GET", `/${enquiryType}/enquiries`)
+    .then((res) => {
+      setEnquiries(res || [])
+      setLoading(false);
+    }).catch((err) => {
+      setLoading(false);
+      throwServerError(err);
+    })
+  }
+
+  useEffect(() => {
+    getData()
+  }, [isAuthenticated])
+
   return (
     <>
       <div className="container py-5">
@@ -38,7 +79,7 @@ const Enquiry = () => {
             padding: "20px",
           }}
         >
-          <table
+          {(loading) ? <Loader /> : <table
             className="table table-striped"
             style={{ tableLayout: "fixed", width: "100%" }}
           >
@@ -59,7 +100,7 @@ const Enquiry = () => {
               </tr>
             </thead>
             <tbody style={{ padding: "0px 10px" }}>
-              {ENQUIRIES_LIST.map((x, ind) => (
+              {enquiries.map((x, ind) => (
                 <tr key={`${ind + 1}`}>
                   <td scope="row" style={{ width: "10%" }}>
                     {`${ind + 1}`}
@@ -88,7 +129,7 @@ const Enquiry = () => {
                       <button
                         type="button"
                         className="btn btn-primary btn-sm"
-                        onClick={() => handleCloseEnquiry(ind)}
+                        onClick={() => handleCloseEnquiry(x.id)}
                       >
                         Close enquiry
                       </button>
@@ -97,7 +138,7 @@ const Enquiry = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>}
         </div>
       </div>
       {viewEnquiry.isOpen ? (

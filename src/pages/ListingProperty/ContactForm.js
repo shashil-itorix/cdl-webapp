@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { objectDeepClone, throwServerError, throwSuccessMessage, TYPE_CONSTANTS } from "../../constants";
+import { makeApiCall } from "../../api";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,33 @@ const ContactForm = () => {
       toast.warning("Please enter all fields")
       return
     }
+
+    const url = window.location.pathname;
+
+    const isCommercial = url.includes("/commercial")
+    const isResidential = url.includes("/residential")
+    const isIndustrial = url.includes("/industrial")
+
+    const tempJson = objectDeepClone(formData)
+    tempJson.enquiryType = isCommercial 
+      ? TYPE_CONSTANTS.COMMERCIAL 
+      : isResidential 
+        ? TYPE_CONSTANTS.RESIDENTIAL
+        : isIndustrial
+          ? TYPE_CONSTANTS.INDUSTRIAL
+          : TYPE_CONSTANTS.GENERAL
+
+    makeApiCall("POST", `/${isResidential ? "residential" : isCommercial ? "commercial" : "industrial"}/enquiries`, objectDeepClone(tempJson))
+    .then(() => {
+      throwSuccessMessage("Enquiry raised successfully")
+      setFormData({
+        name: "",
+        email: "",
+        description: "",
+      })
+    }).catch((err) => {
+      throwServerError(err)
+    })
   }
 
   return (
