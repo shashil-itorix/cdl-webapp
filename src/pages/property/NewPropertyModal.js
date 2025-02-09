@@ -60,7 +60,7 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
       aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered" role="document">
+      <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLongTitle">
@@ -78,7 +78,7 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                     <input
                       type="text"
                       className="form-control w-75"
-                      placeholder="Property name"
+                      placeholder="Add property name"
                       value={propertyDetails.name}
                       required
                       onChange={(e) => handleOnChange("name", e.target.value)}
@@ -94,7 +94,7 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                     <input
                       type="text"
                       className="form-control w-75"
-                      placeholder="Property name"
+                      placeholder="Add Country of the property"
                       value={propertyDetails.country}
                       required
                       onChange={(e) =>
@@ -112,7 +112,7 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                     <input
                       type="text"
                       className="form-control w-75"
-                      placeholder="Property name"
+                      placeholder="Enter full location of the property"
                       value={propertyDetails.fullLocation}
                       required
                       onChange={(e) =>
@@ -194,43 +194,41 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                 </div>
 
                 <div className="col-md-12 mb-3">
-                  <div className="d-flex align-items-center">
-                    <div className="mt-3">
-                      <label style={{ marginRight: 8 }}>Image Links:</label>
-                      {propertyDetails.imagesLinks &&
-                        propertyDetails.imagesLinks.length &&
-                        propertyDetails.imagesLinks.map((link, index) => (
-                          <div
-                            key={index}
-                            className="d-flex align-items-center mb-2"
+                  <div className="mt-3 d-flex align-items-center flex-wrap">
+                    <label style={{ marginRight: 8 }} className="mb-0">Image Links:</label>
+                    {propertyDetails.imagesLinks &&
+                      propertyDetails.imagesLinks.length &&
+                      propertyDetails.imagesLinks.map((link, index) => (
+                        <div
+                          key={index}
+                          className="d-flex align-items-center mb-2"
+                        >
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={link}
+                            onChange={(e) =>
+                              handleImageLinkChange(index, e.target.value)
+                            }
+                            placeholder="Enter image URL"
+                          />
+                          <button
+                            type="button"
+                            className="btn btn-light btn-sm ms-2"
+                            onClick={() => removeImageLink(index)}
                           >
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={link}
-                              onChange={(e) =>
-                                handleImageLinkChange(index, e.target.value)
-                              }
-                              placeholder="Enter image URL"
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-light btn-sm ms-2"
-                              onClick={() => removeImageLink(index)}
-                            >
-                              ❌
-                            </button>
-                          </div>
-                        ))}
+                            ❌
+                          </button>
+                        </div>
+                      ))}
 
-                      <button
-                        type="button"
-                        className="btn btn-secondary btn-sm mt-2"
-                        onClick={addImageLink}
-                      >
-                        ➕ Add Image Link
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      className="btn px-4 py-2 btn-info btn-sm text-white"
+                      onClick={addImageLink}
+                    >
+                      Add Image Link
+                    </button>
                   </div>
                 </div>
               </div>

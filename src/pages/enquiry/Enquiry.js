@@ -47,14 +47,11 @@ const Enquiry = () => {
                 <th scope="col" style={{ width: "10%" }}>
                   S.No
                 </th>
-                <th scope="col" style={{ width: "25%" }}>
+                <th scope="col" style={{ width: "40%" }}>
                   Name
                 </th>
-                <th scope="col" style={{ width: "20%" }}>
+                <th scope="col" style={{ width: "25%" }}>
                   Email
-                </th>
-                <th scope="col" style={{ width: "20%" }}>
-                  Description
                 </th>
                 <th scope="col" className="text-center" style={{ width: "25%" }}>
                   <p className="m-0">Actions</p>
@@ -67,9 +64,8 @@ const Enquiry = () => {
                   <td scope="row" style={{ width: "10%" }}>
                     {`${ind + 1}`}
                   </td>
-                  <td style={{ width: "25%" }}>{x.name}</td>
-                  <td style={{ width: "20%" }}>{x.email}</td>
-                  <td style={{ width: "20%" }}>{x.description}</td>
+                  <td style={{ width: "40%" }}>{x.name}</td>
+                  <td style={{ width: "25%" }}>{x.email}</td>
                   <td className="text-center" style={{ width: "25%" }}>
                     <div
                       className="d-flex justify-content-center align-items-center"
@@ -77,7 +73,7 @@ const Enquiry = () => {
                     >
                       <button
                         type="button"
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-secondary btn-sm"
                         data-toggle="modal"
                         data-target="#exampleModalCenter"
                         onClick={() =>
@@ -91,7 +87,7 @@ const Enquiry = () => {
                       </button>
                       <button
                         type="button"
-                        className="btn btn-dark btn-sm"
+                        className="btn btn-primary btn-sm"
                         onClick={() => handleCloseEnquiry(ind)}
                       >
                         Close enquiry
