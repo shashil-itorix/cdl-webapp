@@ -22,7 +22,7 @@ export default function Header() {
     
 
     return (
-        <div className="w-100 bg-dark">
+        <div style={{ position: "fixed", top: 0, left: 0, zIndex: 10 }} className="w-100 bg-dark">
             <div className="container p-2 d-flex align-items-center justify-content-between">
               <div style={{ cursor: "pointer" }} onClick={() => window.location.href = "/"}>
                 <img src='https://cdl.com.sg/assets/img/home/CDL-Logo_dark-bkg.png' height={50} />

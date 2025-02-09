@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <div className="bg-dark p-4 w-100">
+        <div className="bg-dark p-4 w-100" style={{ marginBottom: -26 }}>
             <div className="container w-100">
                 <div className="w-100 d-flex align-items-center justify-content-between" style={{ padding: "16px 0", borderBottom: "1px solid rgba(247,247,247,.5)" }}>
                     <div className="d-flex align-items-center" style={{ gap: 32 }}>

@@ -151,53 +151,54 @@ export default function PropertyListingPage() {
 
   return (
     <>
-      <nav className="navbar">
-        <div />
-        <div className="nav-section">
-          <p>
-            Home / <span>{routeName} Property</span>
-          </p>
-          <h1>{routeName} Property</h1>
-        </div>
-      </nav>
-      <section className="filter-section">
-        <div className="dropdown-list">
-          {filterObject.map((el, id) => (
-            <div key={id} className="dropdown">
-              <div onClick={() => toggleDropdown(el.key)} className="each-dropdown">
-                <p>{selected[el.key]}</p>
-              </div>
-              {isOpen[el.key] && (
-                <div className="dropdown-content">
-                  {el.items.map((item, index) => (
-                    <p key={index} onClick={() => handleSelect(el.key, item)}>
-                      {item}
-                    </p>
-                  ))}
+      <div className="container p-5">
+        <nav className="navbar">
+          <div />
+          <div className="nav-section-custom">
+            <p style={{ textAlign: "right" }}>
+              Home / <span>{routeName} Property</span>
+            </p>
+            <h1>{routeName} Property</h1>
+          </div>
+        </nav>
+        <section className="filter-section">
+          <div className="dropdown-list">
+            {filterObject.map((el, id) => (
+              <div key={id} className="dropdown">
+                <div onClick={() => toggleDropdown(el.key)} className="each-dropdown">
+                  <p>{selected[el.key]}</p>
                 </div>
-              )}
+                {isOpen[el.key] && (
+                  <div className="dropdown-content">
+                    {el.items.map((item, index) => (
+                      <p key={index} onClick={() => handleSelect(el.key, item)}>
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            <div className="applyClear" onClick={onFilter}>
+              <p>Apply</p>
             </div>
-          ))}
-
-          <div className="applyClear" onClick={onFilter}>
-            <p>Apply</p>
+            <div className="applyClear" onClick={clearAll}>
+              <p>Clear</p>
+            </div>
           </div>
-          <div className="applyClear" onClick={clearAll}>
-            <p>Clear</p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="property-card-section">
-        {filteredProperties.length > 0 ? (
-          filteredProperties.map((property, index) => (
-            <PropertyCard key={index} property={property} />
-          ))
-        ) : (
-          <p>No Properties Available</p>
-        )}
-      </section>
-
+        <section className="property-card-section">
+          {filteredProperties.length > 0 ? (
+            filteredProperties.map((property, index) => (
+              <PropertyCard key={index} property={property} />
+            ))
+          ) : (
+            <p>No Properties Available</p>
+          )}
+        </section>
+      </div>
       <section className="property-form">
         <ContactForm />
       </section>

@@ -1,18 +1,25 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      description: "",
+  });
 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        description: "",
-    });
+  const handleSubmit = () => {
+    if (!formData.name || !formData.email || !formData.description) {
+      toast.warning("Please enter all fields")
+      return
+    }
+  }
 
-    console.log(formData);
   return (
     <div className="form-items">
+      <h3 style={{ fontWeight: 600, fontStyle: "italic"}} className="mb-4 underlineText">Have a query? Raise an enquiry.</h3>
       <div className="form-desc">
-        <label>Name :</label>
+        <label>Name : <span className="text-danger">*</span> </label>
         <input 
             placeholder="Enter your name"
             value={formData.name}
@@ -22,7 +29,7 @@ const ContactForm = () => {
       </div>
 
       <div className="form-desc">
-        <label>Email : </label>
+        <label>Email : <span className="text-danger">*</span> </label>
         <input
         placeholder="Enter your email address"
         value={formData.email}
@@ -33,7 +40,7 @@ const ContactForm = () => {
       </div>
 
       <div className="form-desc">
-        <label>Description :</label>
+        <label>Description :  <span className="text-danger">*</span> </label>
         <textarea 
         placeholder="Enter Enquiry Text"
         value={formData.description}
@@ -43,7 +50,7 @@ const ContactForm = () => {
         />
       </div>
 
-      <button>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 };

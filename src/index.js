@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import "./index.scss"
 import { Auth0Provider } from '@auth0/auth0-react';
+import { ToastContainer, Zoom } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,16 @@ root.render(
       }}
     >
       <App />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Zoom} />
     </Auth0Provider>,
   </React.StrictMode>
 );
