@@ -31,11 +31,69 @@ export default function Header() {
                     <a href='/commercial'>Commercial</a>
                     <a href='/industrial'>Industrial</a>
                     { isAuthenticated
-                        ? <p onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Logout</p>
+                        ? <>
+                        <div className="dropdown">
+                          <a
+                            className="dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            Property
+                          </a>
+
+                          <ul className="dropdown-menu">
+                            <li>
+                              <a className="dropdown-item" href="/commercial/listings">
+                                Commercial
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="/residential/listings">
+                                Residential
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="/industrial/listings">
+                                Industrial
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="dropdown">
+                          <a
+                            className="dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            Enquiry
+                          </a>
+
+                          <ul className="dropdown-menu">
+                            <li>
+                              <a className="dropdown-item" href="/commercial/enquiries">
+                                Commercial
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="/residential/enquiries">
+                                Residential
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="/industrial/enquiries">
+                                Industrial
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Logout</p>
+                        </>
                         : <p onClick={() => loginWithRedirect()} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Login</p>
                     }
                 </div>
             </div>
-        </div>
-    )
+      </div>
+  );
 }
