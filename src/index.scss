@@ -20,11 +20,6 @@ a { color: white; text-decoration: none; font-size: 15px; }
     border-radius: 4px;
     width: fit-content !important;
     cursor: pointer;
-    &:hover{
-        background-color: transparent !important; 
-        color: #dc9b14 !important;
-        border: 2px solid #dc9b14;
-    }
 }
 .position-absolute{ position: absolute; }
 .position-relative{ position: relative; }
@@ -73,3 +68,15 @@ a { color: white; text-decoration: none; font-size: 15px; }
         }
     }
 }
+
+.breadcrumb-container:hover {
+    background-color: rgba(41, 57, 71, 0.1); /* Light hover effect */
+    cursor: pointer;
+
+    &:hover {
+        transition: color 0.3s ease-in-out;
+        border-radius: 4px;
+      }
+  }
+  
+  
