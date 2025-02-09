@@ -78,5 +78,13 @@ a { color: white; text-decoration: none; font-size: 15px; }
         border-radius: 4px;
       }
   }
-  
-  
+  .dropdown-item{
+    font-size: 13px !important;
+  }
+.dropdown-menu.show {
+    width: 120px !important;
+    transform: translate3d(-40px, 36px, 0px) !important;
+}
+.dropdown-menu{
+    --bs-dropdown-min-width: 6.5rem;
+}

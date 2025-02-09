@@ -18,11 +18,11 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/:propertyType/listings",
+      path: "/admin/:propertyType/listings",
       element: <PropertyDetails />,
     },
     {
-      path: "/:propertyType/enquiries",
+      path: "/admin/:propertyType/enquiries",
       element: <Enquiry />,
     },
   ]);

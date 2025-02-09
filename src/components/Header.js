@@ -24,7 +24,9 @@ export default function Header() {
     return (
         <div className="w-100 bg-dark">
             <div className="container p-2 d-flex align-items-center justify-content-between">
+              <div style={{ cursor: "pointer" }} onClick={() => window.location.href = "/"}>
                 <img src='https://cdl.com.sg/assets/img/home/CDL-Logo_dark-bkg.png' height={50} />
+              </div>
 
                 <div className="d-flex align-items-center" style={{ gap: 32 }}>
                     <a href='/residential'>Residential</a>
@@ -44,17 +46,17 @@ export default function Header() {
 
                           <ul className="dropdown-menu">
                             <li>
-                              <a className="dropdown-item" href="/commercial/listings">
+                              <a className="dropdown-item" href="/admin/commercial/listings">
                                 Commercial
                               </a>
                             </li>
                             <li>
-                              <a className="dropdown-item" href="/residential/listings">
+                              <a className="dropdown-item" href="/admin/residential/listings">
                                 Residential
                               </a>
                             </li>
                             <li>
-                              <a className="dropdown-item" href="/industrial/listings">
+                              <a className="dropdown-item" href="/admin/industrial/listings">
                                 Industrial
                               </a>
                             </li>
@@ -72,17 +74,17 @@ export default function Header() {
 
                           <ul className="dropdown-menu">
                             <li>
-                              <a className="dropdown-item" href="/commercial/enquiries">
+                              <a className="dropdown-item" href="/admin/commercial/enquiries">
                                 Commercial
                               </a>
                             </li>
                             <li>
-                              <a className="dropdown-item" href="/residential/enquiries">
+                              <a className="dropdown-item" href="/admin/residential/enquiries">
                                 Residential
                               </a>
                             </li>
                             <li>
-                              <a className="dropdown-item" href="/industrial/enquiries">
+                              <a className="dropdown-item" href="/admin/industrial/enquiries">
                                 Industrial
                               </a>
                             </li>
