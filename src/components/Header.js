@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -29,9 +29,9 @@ export default function Header() {
               </div>
 
                 <div className="d-flex align-items-center" style={{ gap: 32 }}>
-                    <a href='/residential'>Residential</a>
-                    <a href='/commercial'>Commercial</a>
-                    <a href='/industrial'>Industrial</a>
+                    <Link to='/residential'>Residential</Link>
+                    <Link to='/commercial'>Commercial</Link>
+                    <Link to='/industrial'>Industrial</Link>
                     { isAuthenticated
                         ? <>
                         <div className="dropdown">
