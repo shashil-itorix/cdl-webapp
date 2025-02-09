@@ -1,0 +1,82 @@
+[
+  {
+      "type": "sale",
+      "name": "Union Square Residences",
+      "country": "Singapore",
+      "category": "luxury",
+      "status": "in progress",
+      "fullLocation": "District 1, Havelock Road",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2023/03/Property-pg-370xAs-required_2.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "sale",
+      "name": "Norwood Grand",
+      "country": "Singapore",
+      "category": "ultra luxury",
+      "status": "for sale",
+      "fullLocation": "District 24, Champions way",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2023/03/boulevard-88.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "sale",
+      "name": "Luminia Grand",
+      "country": "Singapore",
+      "category": "ready to move-in",
+      "status": "for sale",
+      "fullLocation": "District 25, Bukit Batok West Avenue",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2024/05/Property-Page_thumbnail-370-px-1.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "lease",
+      "name": "Splendide VII",
+      "country": "Japan",
+      "category": "ready to move-in",
+      "status": "for sale",
+      "fullLocation": "OSAKA",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2025/02/Splendide-VII-1024x724.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "lease",
+      "name": "B-PROUD Tenmabashi",
+      "country": "Japan",
+      "category": "luxury",
+      "status": "for sale",
+      "fullLocation": "OSAKA",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2023/03/B-Proud-Tenmabashi-resize-720x1024.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "sale",
+      "name": "City Lux Yokohama",
+      "country": "Japan",
+      "category": "landed development",
+      "status": "for sale",
+      "fullLocation": "YOKOHAMA",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2023/03/LOCs-Yokohama-Bayside-1.jpg"],
+      "propertyType": "residential"
+  },
+  {
+      "type": "sale",
+      "name": "Treetop at Kenmore",
+      "country": "Australia",
+      "category": "landed development",
+      "status": "for sale",
+      "fullLocation": "Brisbance",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2024/01/Kenmore-1024x603.jpg"],
+      "propertyType": "commercial"
+  },
+  {
+      "type": "lease",
+      "name": "Fitzroy Fitzroy",
+      "country": "Australia",
+      "category": "luxury",
+      "status": "in progress",
+      "fullLocation": "Melbourne",
+      "imagesLinks": ["https://www.cdlhomes.com.sg/wp-content/uploads/2023/03/210616-411-421-SMITH-ST-V01-HERO-_0-1024x683.jpg"],
+      "propertyType": "industrial"
+  }
+]

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
     return (
@@ -7,10 +8,10 @@ export default function Header() {
                 <img src='https://cdl.com.sg/assets/img/home/CDL-Logo_dark-bkg.png' height={50} />
 
                 <div className="d-flex align-items-center" style={{ gap: 32 }}>
-                    <a href='/residential'>Residential</a>
-                    <a href='/commercial'>Commercial</a>
-                    <a href='/industrial'>Industrial</a>
-                    <a href='/login' className="font-primary fw-bold">Login</a>
+                    <Link to='/residential'>Residential</Link>
+                    <Link to='/commercial'>Commercial</Link>
+                    <Link to='/industrial'>Industrial</Link>
+                    <Link to='/login' className="font-primary fw-bold">Login</Link>
                 </div>
             </div>
         </div>
