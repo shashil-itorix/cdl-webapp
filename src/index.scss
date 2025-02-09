@@ -73,3 +73,15 @@ a { color: white; text-decoration: none; font-size: 15px; }
         }
     }
 }
+
+.breadcrumb-container:hover {
+    background-color: rgba(41, 57, 71, 0.1); /* Light hover effect */
+    cursor: pointer;
+
+    &:hover {
+        transition: color 0.3s ease-in-out;
+        border-radius: 4px;
+      }
+  }
+  
+  
