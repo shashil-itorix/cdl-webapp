@@ -30,7 +30,6 @@ export default function Header() {
                     <Link to='/residential'>Residential</Link>
                     <Link to='/commercial'>Commercial</Link>
                     <Link to='/industrial'>Industrial</Link>
-                    <Link to='/login' className="font-primary fw-bold">Login</Link>
                     { isAuthenticated
                         ? <>
                         <div className="dropdown">
