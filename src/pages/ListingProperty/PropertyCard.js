@@ -1,10 +1,19 @@
 import React from 'react';
 import "./style.scss";
+import { useNavigate } from 'react-router-dom';
 
 
 const PropertyCard = ({ property }) => {
+
+  const navigate = useNavigate();
+
+  const onCardClick = () => {
+    navigate(`/${property?.propertyType}/${property?.name}`, {
+      state: { property }, 
+    });
+  }
   return (
-    <div className="property-card">
+    <div className="property-card" onClick={() => onCardClick()}>
       <div className="image">
         <img src={property.imagesLinks[0]} alt="property" />
       </div>
