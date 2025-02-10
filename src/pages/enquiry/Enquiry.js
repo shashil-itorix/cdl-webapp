@@ -43,14 +43,12 @@ const Enquiry = () => {
       : "industrial";
 
     makeApiCall("DELETE", `/${enquiryType}/enquiries/${id}`)
-      .then(() => {
-        getData();
-      })
-      .catch((err) => {
-        console.log("err", err);
-        throwServerError(err);
-      });
-  };
+    .then(() => {
+      getData()
+    }).catch((err) => {
+      throwServerError(err);
+    })
+  }
 
   const getData = () => {
     const url = window.location.pathname;
