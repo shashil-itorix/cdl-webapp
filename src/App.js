@@ -17,7 +17,15 @@ function App() {
           element: <HomeRoute />,
         },
         {
-          path: "/:propertyType",
+          path: "/commercial",
+          element: <PropertyListingPage />,
+        },
+        {
+          path: "/residential",
+          element: <PropertyListingPage />,
+        },
+        {
+          path: "/industrial",
           element: <PropertyListingPage />,
         },
         {
