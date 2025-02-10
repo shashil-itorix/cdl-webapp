@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cdl-webapp/static/css/main.3f25aad0.css",
+    "main.js": "/cdl-webapp/static/js/main.423cc44d.js",
+    "index.html": "/cdl-webapp/index.html",
+    "main.3f25aad0.css.map": "/cdl-webapp/static/css/main.3f25aad0.css.map",
+    "main.423cc44d.js.map": "/cdl-webapp/static/js/main.423cc44d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f25aad0.css",
+    "static/js/main.423cc44d.js"
+  ]
+}
