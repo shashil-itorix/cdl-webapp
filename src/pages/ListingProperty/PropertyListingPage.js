@@ -6,10 +6,12 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ContactForm from "./ContactForm";
 import { makeApiCall } from "../../api";
 import { throwServerError } from "../../constants";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function PropertyListingPage() {
   const navigate = useNavigate();
   const { propertyType } = useParams();
+  const { isAuthenticated } = useAuth0();
   const [isOpen, setIsOpen] = useState({
     type: false,
     country: false,
@@ -149,7 +151,7 @@ export default function PropertyListingPage() {
       : "industrial";
 
     setLoading(true);
-    makeApiCall("GET", `/${propertyType}/properties`)
+    makeApiCall("GET", `/${propertyType}/${isAuthenticated ? "properties" : "listings"}`)
       .then((res) => {
         setFilteredProperties(res || []);
         setLoading(false);
