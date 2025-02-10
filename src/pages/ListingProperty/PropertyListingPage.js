@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import PropertyList from "./PropertyList";
 import PropertyCard from "./PropertyCard";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import ContactForm from "./ContactForm";
 import { makeApiCall } from "../../api";
-import { throwServerError } from "../../constants";
+import { throwServerError, TYPE_CONSTANTS } from "../../constants";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function PropertyListingPage() {
-  const navigate = useNavigate();
-  const { propertyType } = useParams();
   const { isAuthenticated } = useAuth0();
+
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState({
     type: false,
     country: false,
@@ -28,6 +28,20 @@ export default function PropertyListingPage() {
   const [routeName, setRouteName] = useState(location.pathname);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const url = window.location.pathname;
+
+  const isCommercial = url.includes("/commercial")
+  const isResidential = url.includes("/residential")
+  const isIndustrial = url.includes("/industrial")
+
+  const propertyTypeMain = isCommercial 
+    ? TYPE_CONSTANTS.COMMERCIAL 
+    : isResidential 
+      ? TYPE_CONSTANTS.RESIDENTIAL
+      : isIndustrial
+        ? TYPE_CONSTANTS.INDUSTRIAL
+        : TYPE_CONSTANTS.GENERAL
 
   const filterObject = [
     {
@@ -151,7 +165,7 @@ export default function PropertyListingPage() {
       : "industrial";
 
     setLoading(true);
-    makeApiCall("GET", `/${propertyType}/${isAuthenticated ? "properties" : "listings"}`)
+    makeApiCall("GET", `/${propertyType}/properties`)
       .then((res) => {
         setFilteredProperties(res || []);
         setLoading(false);
@@ -163,6 +177,10 @@ export default function PropertyListingPage() {
   };
   useEffect(() => {
     getData();
+
+    if (!isAuthenticated) {
+      navigate('/')
+    }
   }, [isAuthenticated, location.pathname]);
 
   return (
@@ -180,7 +198,7 @@ export default function PropertyListingPage() {
               transition: "background-color 0.3s ease-in-out",
             }}
           >
-            {["Home", propertyType.toUpperCase()].map((each, ind) => (
+            {["Home", propertyTypeMain].map((each, ind) => (
               <div className="d-flex align-item-center">
                 <p
                   style={{ opacity: each === "Home" ? 0.5 : 1 }}
@@ -228,7 +246,7 @@ export default function PropertyListingPage() {
           {filteredProperties.length > 0 ? (
             filteredProperties
               .filter(
-                (each) => each.propertyType === propertyType.toUpperCase()
+                (each) => each.propertyType === propertyTypeMain
               )
               .map((property, index) => (
                 <PropertyCard key={index} property={property} />

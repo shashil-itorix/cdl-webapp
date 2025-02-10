@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import { Link, useOutletContext } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Header() {
     const { loginWithRedirect } = useAuth0();
-    const { isAuthenticated, getIdTokenClaims } = useAuth0();
+    const { getIdTokenClaims, isAuthenticated } = useAuth0();
 
     const { logout } = useAuth0();
 
@@ -19,7 +19,6 @@ export default function Header() {
     useEffect(() => {
         handleGetIdToken()
     }, [isAuthenticated])
-    
 
     return (
         <div style={{ position: "fixed", top: 0, left: 0, zIndex: 10 }} className="w-100 bg-dark">
@@ -29,11 +28,11 @@ export default function Header() {
               </div>
 
                 <div className="d-flex align-items-center" style={{ gap: 32 }}>
-                    <Link to='/residential'>Residential</Link>
-                    <Link to='/commercial'>Commercial</Link>
-                    <Link to='/industrial'>Industrial</Link>
                     { isAuthenticated
                         ? <>
+                        <Link to='/residential'>Residential</Link>
+                      <Link to='/commercial'>Commercial</Link>
+                      <Link to='/industrial'>Industrial</Link>
                         <div className="dropdown">
                           <a
                             className="dropdown-toggle"
