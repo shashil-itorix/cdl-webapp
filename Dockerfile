@@ -8,7 +8,7 @@ RUN npm ci && \
 
 FROM nginx:alpine3.19
 COPY --from=build_stage /var/movable/app/dist /opt/build
-COPY ./apiwiz.conf /etc/nginx/conf.d/default.conf
+COPY ./app.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /etc/nginx/nginx.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
 RUN apk upgrade && apk update lib* busy*
