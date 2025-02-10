@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PropertyListingPage from "./pages/ListingProperty/PropertyListingPage";
 import PropertyDetails from "./pages/property/PropertyDetails";
 import Enquiry from "./pages/enquiry/Enquiry";
+import Details from "./pages/PropertyDetails/PropertyDetails";
 function App() {
 
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
         {
           path: "/industrial",
           element: <PropertyListingPage />,
+        },
+        {
+          path: "/:type/:name",
+          element: <Details />,
         },
         {
           path: "/admin/:propertyType/listings",
