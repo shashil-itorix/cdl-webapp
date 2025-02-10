@@ -16,6 +16,14 @@ export const makeApiCall = (method = "GET", url, body = {}) => {
     };
 
     return fetch(`${process.env.REACT_APP_API_URL}${url}`, requestOptions)
-    .then((response) => response.json())
-    .catch((error) => console.error(error));
+    .then((response) => {
+        if (response && response.status === 401) {
+            throw("Your role doesn't have permission to access this feature")
+        }
+        return response.json()
+    })
+    .catch((error) => {
+        console.log('error', error)
+        throw (error)
+    });
 }
