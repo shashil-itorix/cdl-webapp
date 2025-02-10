@@ -162,24 +162,8 @@ export default function PropertyListingPage() {
       });
   };
   useEffect(() => {
-    // if (location.pathname === "/residential") {
-    //   setRouteName("Residential");
-    // } else if (location.pathname === "/commercial") {
-    //   setRouteName("Commercial");
-    // } else {
-    //   setRouteName("Industrial");
-    // }
-    // // based on pathname filtering properties
-    // if (routeName) {
-    //   const filter = PropertyList.filter(
-    //     (property) =>
-    //       property.propertyType.toLowerCase() ===
-    //       location.pathname.split("/")[1].toLowerCase()
-    //   );
-    //   setFilteredProperties(filter);
-    // }
     getData();
-  }, [location.pathname]);
+  }, [isAuthenticated, location.pathname]);
 
   return (
     <>
