@@ -6,7 +6,6 @@ import PropertyListingPage from "./pages/ListingProperty/PropertyListingPage";
 import PropertyDetails from "./pages/property/PropertyDetails";
 import Enquiry from "./pages/enquiry/Enquiry";
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -17,15 +16,7 @@ function App() {
           element: <HomeRoute />,
         },
         {
-          path: "/residential",
-          element: <PropertyListingPage />,
-        },
-        {
-          path: "/commercial",
-          element: <PropertyListingPage />,
-        },
-        {
-          path: "/industrial",
+          path: "/:propertyType",
           element: <PropertyListingPage />,
         },
         {
