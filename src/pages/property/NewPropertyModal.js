@@ -3,10 +3,18 @@ import {
   CATEGORY_OPTIONS,
   MODE,
   PROPERTY_STATUS,
+  PROPERTY_TYPE_OPTIONS,
   TYPE_OPTION,
 } from "./constants";
+import {
+  objectDeepClone,
+  throwServerError,
+  throwSuccessMessage,
+  TYPE_CONSTANTS,
+} from "../../constants";
+import { makeApiCall } from "../../api";
 
-const NewPropertyModal = ({ handleCloseModal, data, type }) => {
+const NewPropertyModal = ({ handleCloseModal, data, type, cb }) => {
   const [propertyDetails, setPropertyDetails] = useState({
     id: "",
     type: "",
@@ -43,11 +51,63 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
     );
     setPropertyDetails((prev) => ({ ...prev, imagesLinks: updatedLinks }));
   };
-  const handleSave = () => {
-    console.log("propertyDetails", propertyDetails);
-    //API call for save
-    // handleCloseModal();
+  const handleSubmit = () => {
+    const url = window.location.pathname;
+
+    const isCommercial = url.includes("/commercial");
+    const isResidential = url.includes("/residential");
+    const isIndustrial = url.includes("/industrial");
+
+    const tempJson = objectDeepClone(propertyDetails);
+    tempJson.propertyType = isCommercial
+      ? TYPE_CONSTANTS.COMMERCIAL
+      : isResidential
+      ? TYPE_CONSTANTS.RESIDENTIAL
+      : isIndustrial
+      ? TYPE_CONSTANTS.INDUSTRIAL
+      : TYPE_CONSTANTS.GENERAL;
+
+    if (propertyDetails.id) {
+      makeApiCall(
+        "PUT",
+        `/${
+          isResidential
+            ? "residential"
+            : isCommercial
+            ? "commercial"
+            : "industrial"
+        }/properties/${propertyDetails.id}`,
+        objectDeepClone(tempJson)
+      )
+        .then(() => {
+          throwSuccessMessage("Property updated successfully");
+          cb();
+        })
+        .catch((err) => {
+          throwServerError(err);
+        });
+    } else {
+      makeApiCall(
+        "POST",
+        `/${
+          isResidential
+            ? "residential"
+            : isCommercial
+            ? "commercial"
+            : "industrial"
+        }/properties`,
+        objectDeepClone(tempJson)
+      )
+        .then(() => {
+          throwSuccessMessage("Property added successfully");
+          cb();
+        })
+        .catch((err) => {
+          throwServerError(err);
+        });
+    }
   };
+
   useEffect(() => {
     setPropertyDetails(data);
   }, [data]);
@@ -60,7 +120,10 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
       aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div
+        className="modal-dialog modal-dialog-centered modal-lg"
+        role="document"
+      >
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLongTitle">
@@ -88,7 +151,29 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
 
                 <div className="col-md-12 mb-3">
                   <div className="d-flex align-items-center">
-                    <label htmlFor="validationCustom01" className="me-2 w-25">
+                    <label htmlFor="propertyType" className="me-2 w-25">
+                      Type:
+                    </label>
+                    <select
+                      id="propertyType"
+                      className="form-select w-75"
+                      value={propertyDetails.type}
+                      onChange={(e) => handleOnChange("type", e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Select Type
+                      </option>
+                      {TYPE_OPTION.map((type, index) => (
+                        <option key={index} value={type.value}>
+                          {type.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-12 mb-3">
+                  <div className="d-flex align-items-center">
+                    <label htmlFor="type" className="me-2 w-25">
                       Country:
                     </label>
                     <input
@@ -125,18 +210,20 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                 <div className="col-md-12 mb-3">
                   <div className="d-flex align-items-center">
                     <label htmlFor="propertyType" className="me-2 w-25">
-                      Property Type:
+                      Property type:
                     </label>
                     <select
                       id="propertyType"
                       className="form-select w-75"
-                      value={propertyDetails.type}
-                      onChange={(e) => handleOnChange("type", e.target.value)}
+                      value={propertyDetails.propertyType}
+                      onChange={(e) =>
+                        handleOnChange("propertyType", e.target.value)
+                      }
                     >
                       <option value="" disabled>
                         Select Property Type
                       </option>
-                      {TYPE_OPTION.map((type, index) => (
+                      {PROPERTY_TYPE_OPTIONS.map((type, index) => (
                         <option key={index} value={type.value}>
                           {type.label}
                         </option>
@@ -144,11 +231,10 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
                     </select>
                   </div>
                 </div>
-
                 <div className="col-md-12 mb-3">
                   <div className="d-flex align-items-center">
                     <label htmlFor="propertyType" className="me-2 w-25">
-                      Property Status:
+                      Property status:
                     </label>
                     <select
                       id="propertyStatus"
@@ -195,7 +281,9 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
 
                 <div className="col-md-12 mb-3">
                   <div className="mt-3 d-flex align-items-center flex-wrap">
-                    <label style={{ marginRight: 8 }} className="mb-0">Image Links:</label>
+                    <label style={{ marginRight: 8 }} className="mb-0">
+                      Image Links:
+                    </label>
                     {propertyDetails.imagesLinks &&
                       propertyDetails.imagesLinks.length &&
                       propertyDetails.imagesLinks.map((link, index) => (
@@ -246,7 +334,7 @@ const NewPropertyModal = ({ handleCloseModal, data, type }) => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={handleSave}
+              onClick={handleSubmit}
             >
               Save changes
             </button>

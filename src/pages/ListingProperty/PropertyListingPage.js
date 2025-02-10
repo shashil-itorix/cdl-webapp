@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import PropertyList from "./PropertyList";
 import PropertyCard from "./PropertyCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ContactForm from "./ContactForm";
+import { makeApiCall } from "../../api";
+import { throwServerError } from "../../constants";
 
 export default function PropertyListingPage() {
+  const navigate = useNavigate();
+  const { propertyType } = useParams();
   const [isOpen, setIsOpen] = useState({
     type: false,
     country: false,
@@ -20,7 +24,8 @@ export default function PropertyListingPage() {
 
   const location = useLocation();
   const [routeName, setRouteName] = useState(location.pathname);
-  const [filteredProperties, setFilteredProperties] = useState(PropertyList);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const filterObject = [
     {
@@ -81,29 +86,32 @@ export default function PropertyListingPage() {
 
     if (routeName) {
       filtered = filtered.filter(
-        (property) => property.propertyType.toLowerCase() === routeName.toLowerCase()
+        (property) =>
+          property.propertyType.toLowerCase() === routeName.toLowerCase()
       );
     }
-
 
     // Type filter
     if (selected.type !== "All Types") {
       filtered = filtered.filter(
-        (property) => property.type.toLowerCase() === selected.type.toLowerCase()
+        (property) =>
+          property.type.toLowerCase() === selected.type.toLowerCase()
       );
     }
 
     // Country filter
     if (selected.country !== "All Countries") {
       filtered = filtered.filter(
-        (property) => property.country.toLowerCase() === selected.country.toLowerCase()
+        (property) =>
+          property.country.toLowerCase() === selected.country.toLowerCase()
       );
     }
 
     // Category filter
     if (selected.category !== "All Category") {
       filtered = filtered.filter(
-        (property) => property.category.toLowerCase() === selected.category.toLowerCase()
+        (property) =>
+          property.category.toLowerCase() === selected.category.toLowerCase()
       );
     }
 
@@ -121,51 +129,92 @@ export default function PropertyListingPage() {
 
     if (routeName) {
       filtered = filtered.filter(
-        (property) => property.propertyType.toLowerCase() === routeName.toLowerCase()
+        (property) =>
+          property.propertyType.toLowerCase() === routeName.toLowerCase()
       );
       setFilteredProperties(filtered);
     }
-    // setFilteredProperties(PropertyList);
   };
 
+  const getData = () => {
+    const url = window.location.pathname;
+
+    const isCommercial = url.includes("/commercial");
+    const isResidential = url.includes("/residential");
+
+    const propertyType = isCommercial
+      ? "commercial"
+      : isResidential
+      ? "residential"
+      : "industrial";
+
+    setLoading(true);
+    makeApiCall("GET", `/${propertyType}/properties`)
+      .then((res) => {
+        setFilteredProperties(res || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        throwServerError(err);
+      });
+  };
   useEffect(() => {
-    if (location.pathname === "/residential") {
-      setRouteName("Residential");
-    } else if (location.pathname === "/commercial") {
-      setRouteName("Commercial");
-    } else {
-      setRouteName("Industrial");
-    }
-
-    // based on pathname filtering properties
-    if (routeName) {
-      const filter =  PropertyList.filter(
-        (property) => property.propertyType.toLowerCase() === location.pathname.split("/")[1].toLowerCase()
-      );
-
-      setFilteredProperties(filter);
-    }
-  
-
+    // if (location.pathname === "/residential") {
+    //   setRouteName("Residential");
+    // } else if (location.pathname === "/commercial") {
+    //   setRouteName("Commercial");
+    // } else {
+    //   setRouteName("Industrial");
+    // }
+    // // based on pathname filtering properties
+    // if (routeName) {
+    //   const filter = PropertyList.filter(
+    //     (property) =>
+    //       property.propertyType.toLowerCase() ===
+    //       location.pathname.split("/")[1].toLowerCase()
+    //   );
+    //   setFilteredProperties(filter);
+    // }
+    getData();
   }, [location.pathname]);
 
   return (
     <>
       <div className="container p-5">
-        <nav className="navbar">
-          <div />
-          <div className="nav-section-custom">
-            <p style={{ textAlign: "right" }}>
-              Home / <span>{routeName} Property</span>
-            </p>
-            <h1>{routeName} Property</h1>
+        <div
+          className="d-flex align-items-center justify-content-end"
+          style={{ marginBottom: 20 }}
+        >
+          <div
+            className="d-flex align-items-center breadcrumb-container"
+            style={{
+              borderLeft: "4px solid #293947",
+              padding: "8px 12px",
+              transition: "background-color 0.3s ease-in-out",
+            }}
+          >
+            {["Home", propertyType.toUpperCase()].map((each, ind) => (
+              <div className="d-flex align-item-center">
+                <p
+                  style={{ opacity: each === "Home" ? 0.5 : 1 }}
+                  onClick={() => each === "Home" && navigate("/")}
+                >
+                  {each}
+                </p>
+                {ind !== 1 && <span className="mx-2">/</span>}
+              </div>
+            ))}
           </div>
-        </nav>
+        </div>
         <section className="filter-section">
           <div className="dropdown-list">
             {filterObject.map((el, id) => (
               <div key={id} className="dropdown">
-                <div onClick={() => toggleDropdown(el.key)} className="each-dropdown">
+                <div
+                  onClick={() => toggleDropdown(el.key)}
+                  className="each-dropdown"
+                >
                   <p>{selected[el.key]}</p>
                 </div>
                 {isOpen[el.key] && (
@@ -191,9 +240,13 @@ export default function PropertyListingPage() {
 
         <section className="property-card-section">
           {filteredProperties.length > 0 ? (
-            filteredProperties.map((property, index) => (
-              <PropertyCard key={index} property={property} />
-            ))
+            filteredProperties
+              .filter(
+                (each) => each.propertyType === propertyType.toUpperCase()
+              )
+              .map((property, index) => (
+                <PropertyCard key={index} property={property} />
+              ))
           ) : (
             <p>No Properties Available</p>
           )}

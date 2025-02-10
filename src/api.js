@@ -1,8 +1,10 @@
 export const makeApiCall = (method = "GET", url, body = {}) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${localStorage.getItem("accessToken")}`);
 
+    if (localStorage.getItem("accessToken")) {
+        myHeaders.append("Authorization", `Bearer ${localStorage.getItem("accessToken")}`);
+    }
     const raw = JSON.stringify(body);
 
     const requestOptions = method === "GET" ? {

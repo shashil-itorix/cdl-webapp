@@ -88,6 +88,65 @@ export default function HomeRoute() {
                             </div>
                         </div>
                     </div>
+                    <div className="d-flex align-items-start w-100 mt-5" style={{ gap: 40 }}>
+                        <div className="d-flex flex-column" style={{ gap: 12, width: 290 }}>
+                            <img style={{ height: 160, borderRadius: 5, boxShadow: "0 4px 8px 0 rgba(0,0,0,.24)" }}
+                                src='https://cdl.com.sg/assets/img/banner/2024_press_release_US_design_unveil_desktop_04.jpg' />
+                            
+                            <div className="d-flex align-items-center mt-2" style={{ gap: 14 }}>
+                                <p style={{ color: "#a67000", fontWeight: "bold", fontSize: 13 }}>Press Release</p>
+                                <p style={{ fontSize: 12, color: "#293947", fontWeight: 400 }}>
+                                    23 January 2025
+                                </p>
+                            </div>
+
+                            <p style={{ fontSize: 17, lineHeight: "27px", fontWeight: 500, color: "#212529" }}>
+                                CDL is the first and only Singapore company on Global 100 listing for 16 consecutive years - ranked 39th overall and top real estate company in 2025
+                            </p>
+                            <div className="d-flex align-items-center" style={{ gap: 16, cursor: "pointer" }}>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">Read More</p>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">→</p>
+                            </div>
+                        </div>
+                        <div className="d-flex flex-column" style={{ gap: 12, width: 290 }}>
+                            <img style={{ height: 160, borderRadius: 5, boxShadow: "0 4px 8px 0 rgba(0,0,0,.24)" }}
+                                src='https://cdl.com.sg/assets/img/banner/2025_press_release_divestment_Hong-Leong-City-Center-Suzhou_Desktop_2025-01-16-074508_hjgp.jpg' />
+                            
+                            <div className="d-flex align-items-center mt-2" style={{ gap: 14 }}>
+                                <p style={{ color: "#a67000", fontWeight: "bold", fontSize: 13 }}>Press Release</p>
+                                <p style={{ fontSize: 12, color: "#293947", fontWeight: 400 }}>
+                                    16 January 2025
+                                </p>
+                            </div>
+
+                            <p style={{ fontSize: 17, lineHeight: "27px", fontWeight: 500, color: "#212529" }}>
+                                CDL achieves over S$600 million in global asset divestments for 2024 as part of capital recycling initiative
+                            </p>
+                            <div className="d-flex align-items-center" style={{ gap: 16, cursor: "pointer" }}>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">Read More</p>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">→</p>
+                            </div>
+                        </div>
+                        <div className="d-flex flex-column" style={{ gap: 12, width: 290 }}>
+                            <img style={{ height: 160, borderRadius: 5, boxShadow: "0 4px 8px 0 rgba(0,0,0,.24)" }}
+                                src='https://cdl.com.sg/assets/img/banner/2024_city_news_strictly_business_chi_01_desktop.jpg' />
+                            
+                            <div className="d-flex align-items-center mt-2" style={{ gap: 14 }}>
+                                <p style={{ color: "#a67000", fontWeight: "bold", fontSize: 13 }}>Press Release</p>
+                                <p style={{ fontSize: 12, color: "#293947", fontWeight: 400 }}>
+                                    26 September 2024
+                                </p>
+                            </div>
+
+                            <p style={{ fontSize: 17, lineHeight: "27px", fontWeight: 500, color: "#212529" }}>
+                                Real estate and hospitality tycoon Mr Kwek Leng Beng launches Chinese edition of his biography
+                            </p>
+                            <div className="d-flex align-items-center" style={{ gap: 16, cursor: "pointer" }}>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">Read More</p>
+                                <p style={{ color: "#a67000", fontSize: 14, fontWeight: 600 }} className="mb-0">→</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
