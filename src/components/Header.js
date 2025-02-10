@@ -90,7 +90,12 @@ export default function Header() {
                             </li>
                           </ul>
                         </div>
-                        <p onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Logout</p>
+                        <p onClick={() => {
+                          if (localStorage.getItem("accessToken")) {
+                            localStorage.removeItem("accessToken")
+                          }
+                          logout({ logoutParams: { returnTo: window.location.origin } })
+                        }} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Logout</p>
                         </>
                         : <p onClick={() => loginWithRedirect()} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Login</p>
                     }
