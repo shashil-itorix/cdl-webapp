@@ -40,7 +40,6 @@ const Enquiry = () => {
     .then(() => {
       getData()
     }).catch((err) => {
-      console.log('err', err);
       throwServerError(err);
     })
   }
