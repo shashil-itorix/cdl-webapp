@@ -91,8 +91,10 @@ export default function Header() {
                           </ul>
                         </div>
                         <p onClick={() => {
-                          if (localStorage.getItem("accessToken")) {
+                          try {
                             localStorage.removeItem("accessToken")
+                          } catch (error) {
+                            console.log('error', error);
                           }
                           logout({ logoutParams: { returnTo: window.location.origin } })
                         }} className="font-primary fw-bold" style={{ cursor: "pointer" }}>Logout</p>
