@@ -83,6 +83,7 @@ export default function PropertyListingPage() {
   //* Filter properties based on selected filters
   const onFilter = () => {
     let filtered = PropertyList;
+    console.log('filtered :', filtered);
 
     if (routeName) {
       filtered = filtered.filter(
@@ -90,7 +91,6 @@ export default function PropertyListingPage() {
           property.propertyType.toLowerCase() === routeName.toLowerCase()
       );
     }
-
     // Type filter
     if (selected.type !== "All Types") {
       filtered = filtered.filter(
@@ -114,6 +114,9 @@ export default function PropertyListingPage() {
           property.category.toLowerCase() === selected.category.toLowerCase()
       );
     }
+
+
+    console.log("selected", selected.type.toLowerCase());
 
     setFilteredProperties(filtered);
   };
@@ -178,6 +181,8 @@ export default function PropertyListingPage() {
     }
     getData();
   }, [location.pathname]);
+
+  console.log("filteredProperties", filteredProperties);
 
   return (
     <>
